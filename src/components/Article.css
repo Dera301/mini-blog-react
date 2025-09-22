@@ -1,0 +1,153 @@
+.article-detail {
+  background: var(--color-surface);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--color-elevated);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.back-button {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+
+.back-button:hover {
+  background: var(--primary-strong);
+  transform: translateY(-1px);
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.edit-btn {
+  background: #ffd700;
+  color: var(--color-text);
+}
+
+.edit-btn:hover {
+  background: #ffcc00;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+}
+
+.article-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.article-category {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 6px 15px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.article-detail h1 {
+  color: var(--color-text);
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.article-meta {
+  color: var(--color-muted);
+  margin-bottom: 10px;
+  font-size: 1rem;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.article-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.article-content p {
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.article-footer {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tags span {
+  background: #f0f0f0;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+@media (max-width: 768px) {
+  .article-detail {
+    padding: 20px;
+  }
+  
+  .article-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+  }
+  
+  .article-detail h1 {
+    font-size: 1.8rem;
+  }
+  
+  .article-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
