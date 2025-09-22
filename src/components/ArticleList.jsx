@@ -1,7 +1,8 @@
 import './ArticleList.css'
 
 function ArticleList({ articles, onArticleClick }) {
-  if (articles.length === 0) {
+  // Vérification de sécurité renforcée
+  if (!articles || !Array.isArray(articles) || articles.length === 0) {
     return (
       <div className="article-list">
         <div className="no-articles">
@@ -12,11 +13,27 @@ function ArticleList({ articles, onArticleClick }) {
     )
   }
 
+  // Filtrer les articles undefined ou invalides
+  const validArticles = articles.filter(article => 
+    article && article.id && article.title && article.category
+  )
+
+  if (validArticles.length === 0) {
+    return (
+      <div className="article-list">
+        <div className="no-articles">
+          <p>📭 Aucun article valide trouvé</p>
+          <p>Les articles peuvent être corrompus</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="article-list">
-      <h2>📰 Derniers articles ({articles.length})</h2>
+      <h2>📰 Derniers articles ({validArticles.length})</h2>
       <div className="articles-grid">
-        {articles.map(article => (
+        {validArticles.map(article => (
           <div 
             key={article.id} 
             className="article-card"

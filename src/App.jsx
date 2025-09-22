@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar'
 import ArticleList from './components/ArticleList'
 import Article from './components/Article'
 import CreateArticle from './components/CreateArticle'
+import EditArticleModal from './components/EditArticleModal'
 import Footer from './components/Footer'
 import './App.css'
 
@@ -13,6 +14,8 @@ function App() {
   const [activeCategory, setActiveCategory] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [showCreateModal, setShowCreateModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [editingArticle, setEditingArticle] = useState(null)
   const [articles, setArticles] = useState([])
 
   // Charger les articles depuis le localStorage au démarrage
@@ -21,7 +24,6 @@ function App() {
     if (savedArticles) {
       setArticles(JSON.parse(savedArticles))
     } else {
-      // Articles par défaut si aucun n'est sauvegardé
       const defaultArticles = [
         {
           id: 1,
@@ -81,6 +83,27 @@ function App() {
     }
   }
 
+  const handleEditArticle = (article) => {
+    setEditingArticle(article)
+    setShowEditModal(true)
+  }
+
+  const handleSaveEdit = (updatedArticle) => {
+    setArticles(prevArticles => 
+      prevArticles.map(article => 
+        article.id === updatedArticle.id ? updatedArticle : article
+      )
+    )
+    setShowEditModal(false)
+    setEditingArticle(null)
+    setSelectedArticle(updatedArticle)
+  }
+
+  const handleCancelEdit = () => {
+    setShowEditModal(false)
+    setEditingArticle(null)
+  }
+
   return (
     <div className="app">
       <Header onNewArticle={() => setShowCreateModal(true)} />
@@ -92,12 +115,12 @@ function App() {
             onSearchChange={setSearchTerm} 
           />
           <Navigation 
-            categories={categories}
+            categories={categories} 
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />
           <ArticleList 
-            articles={filteredArticles}
+            articles={filteredArticles} 
             onArticleClick={setSelectedArticle}
           />
         </>
@@ -106,6 +129,7 @@ function App() {
           article={selectedArticle} 
           onBack={() => setSelectedArticle(null)}
           onDelete={handleDeleteArticle}
+          onEdit={handleEditArticle}
         />
       )}
       
@@ -115,6 +139,14 @@ function App() {
         <CreateArticle 
           onArticleCreated={handleArticleCreated}
           onCancel={() => setShowCreateModal(false)}
+        />
+      )}
+
+      {showEditModal && editingArticle && (
+        <EditArticleModal 
+          article={editingArticle}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
         />
       )}
     </div>

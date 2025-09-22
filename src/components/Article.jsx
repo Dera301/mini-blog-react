@@ -1,8 +1,27 @@
 import './Article.css'
 
-function Article({ article, onBack, onDelete }) {
+function Article({ article, onBack, onDelete, onEdit }) {
+  // Vérification de sécurité cruciale
+  if (!article) {
+    return (
+      <div className="article-detail">
+        <div className="article-actions">
+          <button className="back-button" onClick={onBack}>
+            ← Retour aux articles
+          </button>
+        </div>
+        <div className="error-message">
+          <h2>Article non trouvé</h2>
+          <p>L'article que vous essayez de consulter n'existe pas ou a été supprimé.</p>
+        </div>
+      </div>
+    )
+  }
+
   const handleDelete = () => {
-    onDelete(article.id)
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+      onDelete(article.id)
+    }
   }
 
   return (
@@ -12,10 +31,18 @@ function Article({ article, onBack, onDelete }) {
           ← Retour aux articles
         </button>
         <div className="action-buttons">
-          <button className="edit-btn" title="Modifier (bientôt disponible)">
+          <button
+            className="edit-btn"
+            onClick={() => onEdit(article)}
+            title="Modifier l'article"
+          >
             ✏️ Modifier
           </button>
-          <button className="delete-btn" onClick={handleDelete} title="Supprimer l'article">
+          <button 
+            className="delete-btn" 
+            onClick={handleDelete}
+            title="Supprimer l'article"
+          >
             🗑️ Supprimer
           </button>
         </div>

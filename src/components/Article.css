@@ -1,153 +1,184 @@
-.article-detail {
+/* ===== SECTION ÉDITION D'ARTICLE ===== */
+.edit-article-form {
   background: var(--color-surface);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 20px var(--color-elevated);
-  max-width: 800px;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.article-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.back-button {
-  background: var(--primary);
-  color: var(--primary-contrast);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-weight: 600;
-}
-
-.back-button:hover {
-  background: var(--primary-strong);
-  transform: translateY(-1px);
-}
-
-.edit-btn, .delete-btn {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-.edit-btn {
-  background: #ffd700;
-  color: var(--color-text);
-}
-
-.edit-btn:hover {
-  background: #ffcc00;
-}
-
-.delete-btn {
-  background: #ff6b6b;
-  color: #fff;
-}
-
-.delete-btn:hover {
-  background: #ff5252;
-}
-
-.article-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.article-category {
-  background: var(--primary);
-  color: var(--primary-contrast);
-  padding: 6px 15px;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 20px;
-}
-
-.article-detail h1 {
-  color: var(--color-text);
-  margin-bottom: 20px;
-  font-size: 2.5rem;
-  line-height: 1.2;
-}
-
-.article-meta {
-  color: var(--color-muted);
-  margin-bottom: 10px;
-  font-size: 1rem;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.article-content {
-  line-height: 1.8;
-  font-size: 1.1rem;
-  text-align: left;
-  margin-bottom: 40px;
-}
-
-.article-content p {
+.edit-article-form div {
   margin-bottom: 25px;
-  text-align: justify;
 }
 
-.article-footer {
-  border-top: 1px solid var(--color-border);
-  padding-top: 20px;
+.edit-article-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1rem;
 }
 
-.tags {
+.edit-article-form input,
+.edit-article-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.edit-article-form input:focus,
+.edit-article-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-article-form textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+.edit-form-actions {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
 }
 
-.tags span {
-  background: #f0f0f0;
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-size: 0.9rem;
+.save-btn, .cancel-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn {
+  background: var(--success);
+  color: white;
+}
+
+.save-btn:hover {
+  background: var(--success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+}
+
+.cancel-btn {
+  background: var(--color-muted);
+  color: var(--color-text);
+}
+
+.cancel-btn:hover {
+  background: var(--color-border);
+  transform: translateY(-2px);
+}
+
+/* Indicateur de caractères pour le textarea */
+.char-count {
+  text-align: right;
+  font-size: 0.8rem;
   color: var(--color-muted);
+  margin-top: 5px;
 }
 
+/* Animation d'entrée */
+.edit-article-form {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mode édition pour l'en-tête */
+.article-header.editing {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Responsive design pour l'édition */
 @media (max-width: 768px) {
-  .article-detail {
+  .edit-article-form {
     padding: 20px;
+    margin: 15px 0;
   }
   
-  .article-actions {
-    flex-direction: column;
-    align-items: stretch;
+  .edit-form-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
   }
   
-  .action-buttons {
-    justify-content: center;
+  .save-btn, .cancel-btn {
+    width: 100%;
+    text-align: center;
   }
   
-  .article-detail h1 {
-    font-size: 1.8rem;
+  .edit-article-form input,
+  .edit-article-form textarea {
+    padding: 10px 12px;
   }
-  
-  .article-meta {
-    flex-direction: column;
-    gap: 5px;
-  }
+}
+
+/* États de validation */
+.edit-article-form input:invalid,
+.edit-article-form textarea:invalid {
+  border-color: var(--error);
+}
+
+.edit-article-form input:valid,
+.edit-article-form textarea:valid {
+  border-color: var(--success);
+}
+/* Styles spécifiques pour les éléments de formulaire */
+.form-group {
+  position: relative;
+}
+
+.edit-article-form select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--color-background);
+  color: var(--color-text);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='m0 1 2 2 2-2z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+}
+
+.edit-article-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Amélioration visuelle pendant l'édition */
+.article-detail.editing .article-header,
+.article-detail.editing .article-content,
+.article-detail.editing .article-footer {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
 }
