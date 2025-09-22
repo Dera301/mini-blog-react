@@ -1,0 +1,38 @@
+.navigation {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--primary);
+  background: var(--color-surface);
+  color: var(--primary);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.nav-btn:hover {
+  background: #f0f4ff;
+}
+
+.nav-btn.active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    gap: 5px;
+  }
+  
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
